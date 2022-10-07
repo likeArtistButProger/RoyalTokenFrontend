@@ -38,7 +38,7 @@ const useStakingContract = () => {
 
     const getAccountDeposits = useCallback(async () => {
         if(!!stakingContract && !!account) {
-            const deposits = await stakingContract.getAllDeposits();
+            const deposits = await stakingContract.getAllDeposits({ from: account });
 
             if(deposits.length <= 0) return;
 
@@ -50,7 +50,7 @@ const useStakingContract = () => {
                 }
             });
 
-            setAccountDeposits(deposits);
+            setAccountDeposits(depositsFormatted);
         }
     }, [account, stakingContract]);
 

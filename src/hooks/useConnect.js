@@ -3,6 +3,7 @@ import {useWeb3React} from "@web3-react/core";
 import {NoEthereumProviderError} from '@web3-react/injected-connector'
 import {WALLETS} from "../constants";
 import {useAuthorizeModal} from '../components/AuthorizeModal';
+import { connectorKey } from '../constants';
 
 const useConnect = () => {
   const {activate, deactivate} = useWeb3React();

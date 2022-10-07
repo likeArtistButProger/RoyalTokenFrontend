@@ -26,6 +26,10 @@ const Header = () => {
 
     return (
         <Container>
+            <>
+            <a href="https://royaltoken.vip" target="_blank" rel="noreferrer">
+                <img src="/images/logo.png" width={30} height={30} style={{ cursor: "pointer" }} />
+            </a>
             {
                 !!account ? (
                     <>
@@ -53,6 +57,7 @@ const Header = () => {
                     </Button>
                 )
             }
+            </>
         </Container>
     )
 }

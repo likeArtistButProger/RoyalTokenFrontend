@@ -4,12 +4,13 @@ const Container = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
     padding: 10px 20px;
     background-color: rgba(140, 124, 240, 0.95);
 `
 
 const AccountInfo = styled.div`
+    margin-left: auto;
     display: flex;
     align-items: center;
     padding: 5px 10px;
