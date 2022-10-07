@@ -6,6 +6,19 @@ const RewardsTableStyled = styled(Card)`
 `;
 
 const Table = styled.table`
+    width: 100%;
+    margin-top: 30px;
+
+
+    & thead {
+
+        & tr {
+            margin: 0 auto;
+            font-size: 14px;
+            line-height: 18px;
+            text-align: center;
+        }
+    }
 
 `;
 
