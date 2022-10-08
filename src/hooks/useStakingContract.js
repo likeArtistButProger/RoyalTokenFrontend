@@ -38,7 +38,7 @@ const useStakingContract = () => {
 
     const getAccountDeposits = useCallback(async () => {
         if(!!stakingContract && !!account) {
-            const deposits = await stakingContract.getAllDeposits({ from: account });
+            const deposits = await stakingContract.getAllDeposits(account);
 
             if(deposits.length <= 0) return;
 
@@ -68,7 +68,7 @@ const useStakingContract = () => {
 
     const receiveRewardsRoyt = useCallback(async () => {
         if(!!account && !!stakingContract) {
-            await stakingContract.receiveRewards();
+            await stakingContract.receiveRewards({ gasLimit: "720000" });
         }
     }, [account, stakingContract]);
 
@@ -80,7 +80,7 @@ const useStakingContract = () => {
 
     const receiveRewardsUSDT = useCallback(async () => {
         if(!!account && !!stakingContract) {
-            await stakingContract.receiveRewardsUsdt();
+            await stakingContract.receiveRewardsUsdt({ gasLimit: "720000" });
         }
     }, [account, stakingContract]);
 
