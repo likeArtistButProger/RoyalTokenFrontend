@@ -6,10 +6,14 @@ import { Input } from "../../ui/Input";
 import { BuyCardStyled } from "./styled";
 import { useTimer } from "../../hooks/useTimer";
 
+const getNowInSeconds = () => {
+    return Number((new Date().getTime() / 1000).toFixed())
+}
+
 const BuyCard = () => {
     const [inputAmount, setInputAmount] = useState("");
     const { buyTokens, currentRoundInfo, updateCurrentRoundInfo } = usePresaleContract();
-    const { timeFormatted } = useTimer(currentRoundInfo.startTime, currentRoundInfo.startTime + currentRoundInfo.duration, 1);
+    const { timeFormatted } = useTimer( getNowInSeconds() , Number(currentRoundInfo.startTime) + Number(currentRoundInfo.duration), 1);
 
     const onAction = useCallback(async () => {
         if(inputAmount > 0) {
