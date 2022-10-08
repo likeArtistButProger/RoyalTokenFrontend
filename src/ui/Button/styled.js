@@ -11,6 +11,10 @@ const ButtonStyled = styled.button`
     border-radius: 20px;
     user-select: none;
 
+    &:disabled {
+        opacity: 0.6;
+    }
+
     ${props => {
         switch(props.styleType) {
             case "bigBoy":

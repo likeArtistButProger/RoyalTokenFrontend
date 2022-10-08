@@ -22,17 +22,20 @@ const useStakingContract = () => {
         }
     }, [account, tokenContract, setAllowance]);
     
-    const approveTokens = useCallback(async (amount_) => {
+    const approveTokens = useCallback(async (amount) => {
         if(!!tokenContract && !!account) {
-            const amount = new bn(amount_).times(DEFAULT_DECIMALS).toFixed();
-            
-            await (await tokenContract.approve(STAKING_ADDRESS, amount, { gasLimit: "720000" })).wait();
+            const gasLimit = await tokenContract.estimateGas.approve(STAKING_ADDRESS, amount).catch(err => undefined);
+
+            await (await tokenContract.approve(STAKING_ADDRESS, amount, { gasLimit: gasLimit ?? "500000" })).wait();
         }
     }, [account, tokenContract]);
     
     const stakeTokens = useCallback(async (amount) => {
         if(!!stakingContract && !!account) {
-            await stakingContract.stake(amount, { gasLimit: "720000" });
+
+            const gasLimit = stakingContract.estimateGas.stake(amount).catch(err => undefined);
+
+            await stakingContract.stake(amount, { gasLimit: gasLimit ?? "720000" });
         }
     }, [account, stakingContract]);
 

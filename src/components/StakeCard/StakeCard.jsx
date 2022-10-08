@@ -19,17 +19,20 @@ const StakeCard = () => {
 
     const onAction = useCallback(async () => {
         if(!!account && !!library) {
+            console.log(allowance);
             if(allowance > 0) {
-                if(inputAmount > 0) {
-                    await approveTokens(MAX_UINT);
-                }
-            } else {
                 if(inputAmount > 0) {
                     await stakeTokens(inputAmount);
                 }
+            } else {
+                if(inputAmount > 0) {
+                    await approveTokens(MAX_UINT).then(() => {
+                        checkAllowance();
+                    });
+                }
             }
         }
-    }, [account, library, allowance, approveTokens, inputAmount, stakeTokens]);
+    }, [account, library, allowance, approveTokens, checkAllowance, inputAmount, stakeTokens]);
 
     return (
         <StakeCardStyled>
@@ -37,7 +40,7 @@ const StakeCard = () => {
                 <Label s alignCenter>STAKE</Label>
             </Box>
             <Box type="flex" column>
-                <Box m="0 0 5px 0" type="flex-spreaded">
+                <Box m="25px 0 5px 0" type="flex-spreaded">
                     <Text size="sm">My balance: {balanceROYT} ROYT</Text>
                 </Box>
                 <Input type="number" value={inputAmount} onChange={setInputAmount} />

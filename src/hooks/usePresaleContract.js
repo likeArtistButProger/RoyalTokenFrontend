@@ -8,7 +8,7 @@ import { useWeb3React } from "@web3-react/core";
 const usePresaleContract = () => {
     const [currentRoundInfo, setCurrentRoundInfo] = useState({
         duration: 0,
-        minBuyPrice: new bn("0"),
+        minBuyPrice: new bn("0").toFixed(),
         price: new bn(0).toFixed(),
         saleAmount: "0",
         startTime: "0",

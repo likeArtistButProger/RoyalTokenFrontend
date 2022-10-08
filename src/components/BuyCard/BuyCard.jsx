@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useMemo } from "react";
 import bn from "bignumber.js";
 import { usePresaleContract } from "../../hooks/usePresaleContract";
 import { Box, Button, Label, Text } from "../../ui";
@@ -23,12 +23,19 @@ const BuyCard = () => {
         }
     }, [buyTokens, inputAmount, updateCurrentRoundInfo]);
 
+    const buyAmountEthSufficient = useMemo(() => {
+        return (Number(inputAmount) * Number(currentRoundInfo.price)) > Number(currentRoundInfo.minBuyPrice);
+    }, [inputAmount, currentRoundInfo]);
+
     return (
         <BuyCardStyled>
             <Box m="0 0 10px 0">
                 <Label s alignCenter>BUY</Label>
             </Box>
             <Box type="flex" column>
+                <Box m="0 0 5px 0">
+                    <Text size="sm">Min buy price: {currentRoundInfo.minBuyPrice} ETH</Text>
+                </Box>
                 <Box m="0 0 5px 0" type="flex-spreaded">
                     <Text size="sm">Token price: {currentRoundInfo.price} ETH</Text>
                     <Text size="sm">Round ends in: {timeFormatted}</Text>
@@ -48,7 +55,7 @@ const BuyCard = () => {
                 </Box>
             </Box>
             <Box type="flex" justifyContent="center" m="20px 0 0 0">
-                <Button onClick={onAction} styleType="bigBoy">Buy</Button>
+                <Button onClick={onAction} styleType="bigBoy" disabled={!buyAmountEthSufficient}>Buy</Button>
             </Box>
         </BuyCardStyled>
     );
