@@ -32,7 +32,7 @@ const useStakingContract = () => {
     
     const stakeTokens = useCallback(async (amount) => {
         if(!!stakingContract && !!account) {
-            await stakingContract.stake(amount);
+            await stakingContract.stake(amount, { gasLimit: "720000" });
         }
     }, [account, stakingContract]);
 
