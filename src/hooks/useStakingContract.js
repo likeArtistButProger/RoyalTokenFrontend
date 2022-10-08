@@ -26,7 +26,7 @@ const useStakingContract = () => {
         if(!!tokenContract && !!account) {
             const amount = new bn(amount_).times(DEFAULT_DECIMALS).toFixed();
             
-            await (await tokenContract.approve(STAKING_ADDRESS, amount)).wait();
+            await (await tokenContract.approve(STAKING_ADDRESS, amount, { gasLimit: "720000" })).wait();
         }
     }, [account, tokenContract]);
     
